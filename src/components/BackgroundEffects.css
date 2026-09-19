@@ -1,0 +1,41 @@
+.background-effects-container {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2.5s ease-in-out;
+  overflow: hidden;
+  /* Deep warm vignette gradient */
+  background: radial-gradient(circle at center, rgba(30, 0, 5, 0.4) 0%, rgba(5, 0, 0, 0.8) 100%);
+}
+
+.background-effects-container.visible {
+  opacity: 1;
+}
+
+.bokeh-particle {
+  position: absolute;
+  bottom: -150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 80, 80, 0.8) 0%, rgba(200, 0, 20, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+  filter: blur(8px);
+  animation-name: float-up;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  33% {
+    transform: translateY(-40vh) translateX(30px) scale(1.1);
+  }
+  66% {
+    transform: translateY(-80vh) translateX(-20px) scale(0.9);
+  }
+  100% {
+    transform: translateY(-120vh) translateX(10px) scale(1);
+  }
+}
