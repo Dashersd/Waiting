@@ -1,1 +1,33 @@
 /* Cleaned up App.css */
+.next-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 200, 200, 0.8);
+  font-family: 'Georgia', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 200, 200, 0.3);
+  border-radius: 20px;
+  animation: fadeIn 3s forwards, pulseLabel 3s infinite alternate;
+  z-index: 4000;
+  transition: all 0.3s ease;
+}
+
+.next-label:hover {
+  background: rgba(255, 200, 200, 0.1);
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulseLabel {
+  from { box-shadow: 0 0 5px rgba(255, 50, 50, 0.2); }
+  to { box-shadow: 0 0 15px rgba(255, 50, 50, 0.6); }
+}

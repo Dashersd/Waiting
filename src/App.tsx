@@ -1,18 +1,25 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import './App.css'
 import Preloader from './components/Preloader'
 import ParticleHeart from './components/ParticleHeart'
 import ConfessionLetter from './components/ConfessionLetter'
 import BackgroundEffects from './components/BackgroundEffects'
+import NextAnimation from './components/NextAnimation'
 
 function App() {
   const [showParticles, setShowParticles] = useState(false)
   const [isDispersing, setIsDispersing] = useState(false)
   const [showEnvelope, setShowEnvelope] = useState(false)
+  const [letterClosed, setLetterClosed] = useState(false)
+  const [showNextAnimation, setShowNextAnimation] = useState(false)
+  const audioRef = useRef<HTMLAudioElement>(null)
 
   const handleScreenClick = () => {
     if (showParticles && !isDispersing && !showEnvelope) {
       setIsDispersing(true);
+      if (audioRef.current) {
+        audioRef.current.play().catch(e => console.error("Audio play failed:", e));
+      }
     }
   };
 
@@ -32,7 +39,24 @@ function App() {
         isDispersing={isDispersing}
         onDispersed={handleParticlesDispersed}
       />
-      <ConfessionLetter visible={showEnvelope} />
+      {!letterClosed && (
+        <ConfessionLetter 
+          visible={showEnvelope} 
+          onClosed={() => setLetterClosed(true)} 
+        />
+      )}
+
+      {letterClosed && !showNextAnimation && (
+        <div 
+          className="next-label"
+          onClick={() => setShowNextAnimation(true)}
+        >
+          One more thing...
+        </div>
+      )}
+
+      <NextAnimation visible={showNextAnimation} />
+      <audio ref={audioRef} src="/music/Ace Banzuelo - Muli (Secret Verse).mp3" loop />
     </div>
   )
 }

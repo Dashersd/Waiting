@@ -108,6 +108,70 @@
   opacity: 0;
   transition: opacity 1s ease-in-out 0.5s;
   padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Closing / Burst Styles */
+.confession-container.closing .envelope-wrapper {
+  opacity: 0;
+  transform: scale(1.1) translateY(-20px);
+  filter: blur(10px);
+  pointer-events: none;
+  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.close-btn {
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid rgba(150, 20, 30, 0.4);
+  color: #900;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 1rem;
+  opacity: 0;
+  animation: fadeInClose 2s forwards;
+  transition: all 0.3s;
+  align-self: center;
+}
+
+.close-btn:hover {
+  background: rgba(150, 20, 30, 0.1);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInClose {
+  to { opacity: 1; }
+}
+
+.burst-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 50, 50, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 50, 50, 0.8);
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  animation: burstOut 1.5s ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes burstOut {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0);
+    opacity: 0;
+  }
 }
 
 .envelope-wrapper.open .letter-content {

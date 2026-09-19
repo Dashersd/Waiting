@@ -1,0 +1,67 @@
+.next-animation-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  flex-direction: column;
+}
+
+.constellation-svg {
+  width: 500px;
+  max-width: 90vw;
+  height: 500px;
+  max-height: 90vw;
+  overflow: visible;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
+
+.constellation-line {
+  fill: none;
+  stroke: rgba(255, 200, 200, 0.4);
+  stroke-width: 1.5;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: drawLine 4s ease-in-out forwards;
+}
+
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+.star {
+  fill: #fff;
+  filter: drop-shadow(0 0 6px rgba(255, 200, 200, 0.8));
+  opacity: 0;
+  animation: twinkleIn 2s ease-out forwards;
+}
+
+@keyframes twinkleIn {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.5); }
+  100% { opacity: 0.8; transform: scale(1); }
+}
+
+.final-quote {
+  position: absolute;
+  top: 75%;
+  color: rgba(255, 240, 245, 0.9);
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 3s ease-in-out;
+  text-shadow: 0 0 15px rgba(255, 50, 50, 0.5);
+}
+
+.final-quote.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
